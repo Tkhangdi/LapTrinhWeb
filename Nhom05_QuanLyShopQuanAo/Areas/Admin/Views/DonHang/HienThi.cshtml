@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "Danh Sách Đơn Hàng";
+}
+
+@model Nhom05_QuanLyShopQuanAo.Models.DonHang
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Đơn Hàng</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <style>
+
+        .filter-container, .sort-buttons {
+            margin-bottom: 20px;
+        }
+
+        .no-orders {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="filter-container">
+        <label for="orderStatus">Chọn Trạng Thái Đơn Hàng:</label>
+        <select id="orderStatus" onchange="filterOrders()">
+            <option value="">Tất cả</option>
+            <option value="Đang xử lý">Đang xử lý</option>
+            <option value="Đã xác nhận">Đã xác nhận</option>
+            <option value="Đã hủy">Đã hủy</option>
+        </select>
+    </div>
+
+    <div class="sort-buttons">
+        <button class="btn btn-primary" onclick="sortOrders('asc')">Sắp Xếp Theo Ngày Tăng Dần</button>
+        <button class="btn btn-primary" onclick="sortOrders('desc')">Sắp Xếp Theo Ngày Giảm Dần</button>
+    </div>
+
+    @if (ViewBag.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Mã Đơn Hàng</th>
+                    <th>Trạng Thái</th>
+                    <th>Ngày Đặt</th>
+                    <th>Phương thức thanh toán</th>
+                    <th>Tổng tiền</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="donhangContainer">
+                @foreach (var donHang in ViewBag.DonHangList)
+                {
+                    <tr class="donhang-order-card" data-date="@donHang.NgayDat.ToString("yyyy-MM-dd")" data-status="@donHang.TrangThaiDonHang">
+                        <td>@donHang.MaDonHang</td>
+                        <td>@donHang.TrangThaiDonHang</td>
+                        <td>@donHang.NgayDat.ToString("dd/MM/yyyy")</td>
+                        <td>@(string.IsNullOrEmpty(donHang.PhuongThucThanhToan) ? "N/A" : donHang.PhuongThucThanhToan)</td>
+                        <td>@string.Format("{0:0,00} đ", donHang.TongTien)</td>
+                        <td><a href="@Url.Action("ChiTietDH", "DonHang", new { id = donHang.MaDonHang })" class="donhang-view-details">Xem Chi Tiết</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h1 class="no-orders">Không có đơn hàng nào</h1>
+    }
+
+    <script>
+        function filterOrders() {
+            const selectedStatus = document.getElementById('orderStatus').value;
+            const rows = document.querySelectorAll('.donhang-order-card');
+
+            rows.forEach(row => {
+                const rowStatus = row.getAttribute('data-status');
+
+                if (selectedStatus === "" || rowStatus === selectedStatus) {
+                    row.style.display = 'table-row';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function sortOrders(order) {
+            const container = document.getElementById('donhangContainer');
+            const rows = Array.from(container.children);
+
+            rows.sort((a, b) => {
+                const dateA = new Date(a.getAttribute('data-date'));
+                const dateB = new Date(b.getAttribute('data-date'));
+                return order === 'asc' ? dateA - dateB : dateB - dateA;
+            });
+
+            // Clear the container and append sorted rows
+            container.innerHTML = '';
+            rows.forEach(row => container.appendChild(row));
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Nhom05_QuanLyShopQuanAo.Areas.Admin.Data.SanPhamInfor>
+@{
+    ViewBag.Title = "Quản Lý Kho Hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .form-group {
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+</style>
+@Html.ActionLink("Thêm sản phẩm vào kho", "ChonSanPham", "QuanLyKhoHang", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Xem lịch sử nhập hàng", "LichSuNhapHang", "QuanLyKhoHang", null, new { @class = "btn btn-primary" })
+
+<form method="post" action="/Admin/QuanLyKhoHang/Index">
+    <div class="form-group">
+        <label for="MaDanhMuc">Chọn Danh Mục:</label>
+        <select id="MaDanhMuc" name="MaDanhMuc" class="form-control">
+            <option value="">Tất cả</option>
+            @foreach (var danhMuc in ViewBag.DanhMuc)
+            {
+                <option value="@danhMuc.MaDanhMuc">@danhMuc.TenDanhMuc</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Mã Sản Phẩm</td>
+            <td>Tên Sản Phẩm</td>
+            <td>Danh Mục</td>
+            <td>Size</td>
+            <td>Số Lượng Tồn Kho</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sp in Model)
+        {
+            <tr>
+                <td>@sp.MaSanPham</td>
+                <td>@sp.TenSanPham</td>
+                <td>@sp.DanhMuc</td>
+                <td>@sp.Size</td>
+                <td>@sp.SoLuong</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Tổng số lượng hàng tồn kho : @ViewBag.SoLuong</h2>

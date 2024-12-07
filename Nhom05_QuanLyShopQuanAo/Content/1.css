@@ -1,0 +1,72 @@
+﻿/* Tiêu đề trang */
+.wrapper-heading-home {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.subheading {
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Tabs */
+.tab-title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.box-tabs {
+    list-style: none;
+    display: flex;
+}
+
+    .box-tabs li {
+        margin-right: 10px;
+    }
+
+        .box-tabs li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+            .box-tabs li.active a,
+            .box-tabs li a:hover {
+                background-color: #007bff;
+                color: #fff;
+            }
+
+.button-add {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.product-img:hover .button-add {
+    opacity: 1;
+}
+
+.button-add button {
+    padding: 6px 12px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .button-add button:hover {
+        background-color: #0056b3;
+    }

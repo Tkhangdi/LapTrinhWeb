@@ -1,0 +1,39 @@
+﻿/* Sidebar Styling */
+#wrapper {
+    display: flex;
+}
+
+#sidebar-wrapper {
+    width: 250px;
+    min-height: 100vh;
+}
+
+#page-content-wrapper {
+    width: 100%;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: -250px;
+}
+
+.sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+    background: #f8f9fa;
+}
+
+.list-group-item-action {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+    .list-group-item-action:hover {
+        background-color: #e9ecef;
+        color: #000;
+    }
+
+/* Toggle Button Styling */
+#menu-toggle {
+    margin: 1rem;
+}

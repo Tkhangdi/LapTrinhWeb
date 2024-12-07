@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+@model Nhom05_QuanLyShopQuanAo.Models.NhanVien
+
+<h2>Sửa Thông Tin Nhân Viên</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Thông Tin Nhân Viên</h4>
+        <hr />
+
+        @Html.HiddenFor(model => model.TenDangNhap)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ho, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Ho, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ten, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Ten, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GioiTinh, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.GioiTinh, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DienThoai, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DienThoai, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ChucVu, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.ChucVu, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Lưu" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+

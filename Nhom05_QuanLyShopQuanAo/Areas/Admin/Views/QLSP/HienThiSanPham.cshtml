@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Nhom05_QuanLyShopQuanAo.Models.SanPham>
+
+@{
+    ViewBag.Title = "Quản Lý Sản Phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="d-flex justify-content-between mt-3">
+        <p>
+            @Html.ActionLink("Tạo sản phẩm mới", "TaoSP", "QLSP", null, new { @class = "btn btn-success" })
+        </p>
+
+        <div>
+            <a class="btn btn-sm btn-info" href="@Url.Action("HienThiDanhMuc", "QLDM")">Quản lý danh mục</a>
+            <a class="btn btn-sm btn-info" href="@Url.Action("HienThiThuongHieu", "QLTH")">Quản lý thương hiệu</a>
+        </div>
+    </div>
+
+
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Mã sản phẩm
+                </th>
+                <th>
+                    Tên sản phẩm
+                </th>
+                <th>
+                    Giới tính
+                </th>
+                <th>
+                    Mã danh mục
+                </th>
+                <th>
+                    Mã thương hiệu
+                </th>
+                <th>
+                    Giá
+                </th>
+                <th>
+                    Mô tả
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaSanPham)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenSanPham)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GioiTinh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaDanhMuc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaThuongHieu)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gia)
+                    </td>
+                    <td title="@item.MoTa" class="limit-word">
+                        @(item.MoTa != null && item.MoTa.Length > 50 ? item.MoTa.Substring(0, 50) + "..." : item.MoTa)
+                    </td>
+
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="@Url.Action("CapNhatSP", new { MaSanPham = item.MaSanPham })">Cập nhật</a>
+                        <a class="btn btn-sm btn-danger" href="@Url.Action("XoaSanPham", new { MaSanPham = item.MaSanPham })">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Danh Sách Nhân Viên";
+}
+
+@model IEnumerable<Nhom05_QuanLyShopQuanAo.Models.NhanVien>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tên Đăng Nhập</th>
+            <th>Họ</th>
+            <th>Tên</th>
+            <th>Giới Tính</th>
+            <th>Email</th>
+            <th>Điện Thoại</th>
+            <th>Chức Vụ</th>
+            <th>Thao Tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.TenDangNhap</td>
+                <td>@item.Ho</td>
+                <td>@item.Ten</td>
+                <td>@item.GioiTinh</td>
+                <td>@item.Email</td>
+                <td>@item.DienThoai</td>
+                <td>@item.ChucVu</td>
+                <td>
+                    @Html.ActionLink("Xem", "Details", new { id = item.TenDangNhap }) |
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.TenDangNhap })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    @Html.ActionLink("Thêm Nhân Viên Mới", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+

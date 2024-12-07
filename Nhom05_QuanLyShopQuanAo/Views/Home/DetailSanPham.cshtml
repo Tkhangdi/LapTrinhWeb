@@ -1,0 +1,67 @@
+﻿@using Nhom05_QuanLyShopQuanAo.Models
+@model SanPham
+@{
+    List<Size_SanPham> ListSpSize = ViewBag.sizeSP as List<Size_SanPham>;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Chi tiết sản phẩm - @Model.TenSanPham</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="font-family: 'Arial', sans-serif; background-color: #f8f9fa; color: #333;">
+
+    <div style="max-width: 800px; margin: 0 auto; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin-top: 150px;">
+        <h2 style="margin-top: 50px; text-align: center; color: #007bff;">@Model.TenSanPham</h2>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+            <div style="flex: 1;">
+                <img src="@Url.Content("~/images/QuanAo/" + Model.Anh)" alt="@Model.TenSanPham" style="max-width: 100%; height: auto; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);" />
+            </div>
+
+            <div style="flex: 1; padding: 0 20px;">
+                <p><strong>Giới tính:</strong> @Model.GioiTinh</p>
+                <p><strong>Danh mục:</strong> @Model.MaDanhMuc</p>
+                <p><strong>Thương hiệu:</strong> @Model.MaThuongHieu</p>
+                <p><strong>Giá:</strong> @Model.Gia</p>
+                <p><strong>Mô tả:</strong> @Model.MoTa</p>
+
+                <div style="margin-top: 20px;">
+                    <form action="@Url.Action("ThemVaoGioHang", "GioHang")" method="post">
+                        <input type="hidden" name="maSanPham" value="@Model.MaSanPham" />
+                        <div class="row">
+                            <div class=" col-5">
+                                <select name="sizeSP" class="form-select" style="width:100px">
+                                    <option disabled selected>Chọn size</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                </select>
+                            </div>
+                            <div class=" col-5">
+                                <input type="number" placeholder="Nhập số lượng" name="sl" class="form-control" value="1" style="height:25.8px;width:150px" />
+                            </div>
+                        </div>
+
+                        <br /><br />
+                        <button type="submit" title="Thêm vào giỏ" style="background: linear-gradient(to right, #007bff, #0056b3); color: #fff; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; transition: background 0.3s;">
+                            Thêm vào giỏ
+                        </button>
+                        @if (TempData["Error"] != null)
+                        {
+                            <div style="margin-top:20px" class="alert alert-danger">@TempData["Error"]</div>
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+

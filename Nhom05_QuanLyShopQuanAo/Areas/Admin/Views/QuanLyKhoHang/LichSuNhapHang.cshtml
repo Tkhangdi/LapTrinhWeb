@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Nhom05_QuanLyShopQuanAo.Models.LichSuNhapHang>
+@{
+    ViewBag.Title = "Lịch sử nhập hàng";
+}
+<table class="table">
+    <thead>
+        <tr>
+            <td>Mã Nhân Viên</td>
+            <td>Mã Nhập Hàng</td>
+            <td>Mã Sản Phẩm</td>
+            <td>Size</td>
+            <td>Số Lượng</td>
+            <td>Ngày Nhập</td>
+            <td>Tổng Giá</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lichsu in Model)
+        {
+            <tr>
+                <td>@lichsu.MaNhanVien</td>
+                <td>@lichsu.MaLSNH</td>
+                <td>@lichsu.MaSP</td>
+                <td>@lichsu.MaSize</td>
+                <td>@lichsu.SoLuong</td>
+                <td>@lichsu.NgayNhap</td>
+                <td>@lichsu.TongGia</td>
+            </tr>
+        }
+    </tbody>
+</table>

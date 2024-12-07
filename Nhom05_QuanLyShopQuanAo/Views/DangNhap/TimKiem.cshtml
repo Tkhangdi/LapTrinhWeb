@@ -1,0 +1,20 @@
+﻿@model List<Nhom05_QuanLyShopQuanAo.Models.SanPham>
+@{
+    ViewBag.Title = "TimKiem";
+}
+
+
+<div style="margin-top:200px" class="container">
+    @{ foreach(var item in Model){
+
+        <div class="card" style="width: 15rem;">
+            <img class="card-img-top" src="~/images/@item.Anh" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@item.TenSanPham</h5>
+                <p class="card-text"> @string.Format("{0:0,00} đ",item.Gia) </p>
+                <a href="~/Home/DetailSanPham/@item.MaSanPham" class="btn btn-primary">Xem chi tiết</a>
+            </div>
+        </div>
+    }}
+</div>
+

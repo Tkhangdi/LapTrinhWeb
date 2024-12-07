@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Nhom05_QuanLyShopQuanAo.Models.DanhMuc>
+
+@{
+    ViewBag.Title = "Quản Lý Danh Mục";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+
+    <div class="d-flex justify-content-between mt-3">
+        <p>
+            @Html.ActionLink("Tạo danh mục mới", "TaoDM", "QLDM", null, new { @class = "btn btn-success" })
+        </p>
+
+        <div>
+            <a class="btn btn-sm btn-info" href="@Url.Action("HienThiSanPham", "QLSP")">Quản lý Sản Phẩm</a>
+            <a class="btn btn-sm btn-info" href="@Url.Action("HienThiThuongHieu", "QLTH")">Quản lý Thương Hiệu</a>
+        </div>
+    </div>
+
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Mã danh mục
+                </th>
+                <th>
+                    Tên danh mục
+                </th>
+                <th>hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaDanhMuc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenDanhMuc)
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="@Url.Action("CapNhatDM", new { MaDanhMuc = item.MaDanhMuc })">Cập nhật</a>
+                        @*<a class="btn btn-sm btn-danger" href="@Url.Action("XoaDM", new { MaDanhMuc = item.MaDanhMuc })">Xóa</a>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+
+
+
+
+

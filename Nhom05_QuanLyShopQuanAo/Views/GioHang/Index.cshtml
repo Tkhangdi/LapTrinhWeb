@@ -1,0 +1,141 @@
+﻿
+@using Nhom05_QuanLyShopQuanAo.Models
+@model GioHang
+
+<div class="container" style="padding-top:200px">
+    <h2>Giỏ Hàng</h2>
+
+    <!-- Phần hiển thị thông báo lỗi và thành công -->
+    @if (TempData["StockError"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <strong>Lỗi: </strong>@TempData["StockError"]
+        </div>}
+    @if (TempData["OrderSuccess"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <strong>Thành công: </strong>@TempData["OrderSuccess"]
+        </div>}
+    @if (TempData["CartEmpty"] != null)
+    {
+        <div class="alert alert-warning" role="alert">
+            <strong>Thông báo: </strong>@TempData["CartEmpty"]
+        </div>}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Tên Sản Phẩm</th>
+                <th>Giá</th>
+                <th>Số Lượng</th>
+                <th>Mô Tả Sản Phẩm</th>
+                <th>Tổng Tiền</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                decimal tongTien = 0;
+            }
+            @foreach (var item in Model.lst)
+            {
+                <tr>
+                    <td>@item.TenSanPham</td>
+                    <td>@String.Format("{0:0,0} VND", item.Gia)</td>
+                    <td>
+                        @*<input type="number" value="@item.SoLuong" min="1" style="width: 60px;" />*@
+
+                        <!-- Form cập nhật số lượng -->
+                        <form action="@Url.Action("CapNhatSoLuong", "GioHang")" method="post">
+                            <input type="hidden" name="maSanPham" value="@item.MaSanPham" />
+                            <input type="number" name="soLuong" value="@item.SoLuong" min="1" style="width: 60px;" />
+                            <button type="submit" class="btn btn-primary btn-sm" style="margin-top:5px">Thay đổi số lượng</button>
+                        </form>
+                    </td>
+                    <td>@item.MoTa</td> <!-- Hiển thị mô tả sản phẩm -->
+                    <td>@String.Format("{0:0,0} VND", item.ThanhTien)</td>
+                    <td>
+                        <!-- Nút Xóa -->
+                        <form action="~/GioHang/XoaKhoiGioHang" method="post">
+                            <input type="hidden" name="id" value="@item.MaSanPham" />
+                            <input type="submit" name="" class="btn btn-danger" value="Xóa">
+                        </form>
+
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="5" class="text-right"><strong>Tổng Tiền:</strong></td>
+                <td>@String.Format("{0:0,0} VND", Model.lst.Sum(t => t.ThanhTien)) </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Tiếp Tục Mua Sắm</a>
+
+    <div class="container" style="padding-left:990px">
+        <form action="@Url.Action("DatHang", "GioHang")" method="post">
+            <button type="submit" onclick="showAlert()" class="btn btn-success">Đặt Hàng</button>
+            <!-- Modal -->
+
+        </form>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+        function showAlert() {
+        const userConfirmed = confirm('Bạn có chắc chắn muốn đặt hàng không?');
+        if (userConfirmed) {
+            alert('Đặt hàng thành công!');
+            // Thực hiện logic đặt hàng ở đây (nếu cần)
+        } else {
+            alert('Bạn đã hủy đặt hàng!');
+        }
+    }
+
+
+
+function updateCartCount() {
+    $.ajax({
+        @*url: '@Url.Action("GetCartCount", "GioHang")',
+        method: 'GET',*@
+        success: function (data) {
+            $('#checkout_items').text(data); // Cập nhật số lượng trên biểu tượng giỏ hàng
+        }
+    });
+    }
+
+function xoaKhoiGioHang(maSanPham) {
+    $.ajax({
+        url: '@Url.Action("XoaKhoiGioHang", "GioHang")',
+        type: 'POST',
+        data: { maSanPham: maSanPham },
+        success: function () {
+            updateCartCount(); // Cập nhật số lượng trên biểu tượng giỏ hàng
+            location.reload(); // Tải lại trang để cập nhật danh sách giỏ hàng
+        },
+        error: function () {
+            alert("Xóa sản phẩm thất bại. Vui lòng thử lại.");
+        }
+    });
+}
+
+$(document).ready(function() {
+    updateCartCount();
+});
+</script>
+
+
+
+<script src="~/Content/TranKhangDI_css/js/bootstrap.bundle.js"></script>
+<script src="~/Content/TranKhangDI_css/js/bootstrap.min.js"></script>
+

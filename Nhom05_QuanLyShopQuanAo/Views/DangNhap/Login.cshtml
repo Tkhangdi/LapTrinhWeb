@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "Login";
+}
+
+
+<div class="login-container" style="display:flex; justify-content: center; align-items: center; height: 100vh">
+    <div class="login-form" style="width: 320px; padding: 30px; background-color: #f0f0f0; border-radius: 8px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);">
+        <h2 style="text-align: center; color: #333; margin-bottom: 40px;">Login</h2>
+        <form action="/DangNhap/Login" method="post">
+            <div style="margin-bottom: 50px;">
+                <label for="username" style="color: #333;">Username</label>
+                <input type="text" id="username" name="manv" required
+                       style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;" />
+            </div>
+            <div style="margin-bottom: 50px;">
+                <label for="password" style="color: #333;">Password</label>
+                <input type="password" id="password" name="mk" required
+                       style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;" />
+            </div>
+            <div style="text-align: center;">
+                <button type="submit" style="background-color: #1e1e27; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+                    Log in
+                </button>
+            </div>
+
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div style="color: red; text-align: center; margin-top: 15px;">
+                    @ViewBag.ErrorMessage
+                </div>
+            }
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+

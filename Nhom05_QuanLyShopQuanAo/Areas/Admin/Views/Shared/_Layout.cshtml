@@ -1,0 +1,59 @@
+﻿@using Nhom05_QuanLyShopQuanAo.Models
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Admin Panel</title>
+    <link href="~/Content/TranKhangDI_css/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/TranKhangDI_css/css/AdminStyle.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="border-right bg-light" id="sidebar-wrapper">
+            <div class="sidebar-heading" style="font-size:50px;font-weight:800">Admin</div>
+            <div class="list-group list-group-flush">
+                <a href="@Url.Action("Index", "Admin", new { area = "Admin" })" class="list-group-item list-group-item-action bg-light"><i class="fas fa-users"></i> Quản lý nhân viên</a>
+                <a href="@Url.Action("HienThiSanPham", "QLSP", new { area = "Admin" })" class="list-group-item list-group-item-action bg-light"><i class="fas fa-box"></i> Quản lý sản phẩm</a>
+                <a href="@Url.Action("HienThi", "DonHang")" class="list-group-item list-group-item-action bg-light"><i class="fas fa-shopping-basket"></i> Quản lý đơn hàng</a>
+                <a href="@Url.Action("Index", "QuanLyKhoHang")" class="list-group-item list-group-item-action bg-light"><i class="fas fa-warehouse"></i> Quản lý kho hàng</a>
+                <a href="@Url.Action("Index", "DoanhThu")" class="list-group-item list-group-item-action bg-light"><i class="fas fa-chart-line"></i> Thống kê doanh thu</a>
+                @if (Session["quanly"] == null)
+                {
+                    <a href="#" class="list-group-item list-group-item-action bg-light"></a>
+                }
+                else
+                {
+                    var tenAd = Session["quanly"] as UserAccount;
+                    <a href="@Url.Action("ThongTinAdmin", "ThongTin", new { area = "Admin" })" class="list-group-item list-group-item-action bg-light">Admin: @tenAd.NhanVien.Ho @tenAd.NhanVien.Ten</a>
+                }
+            </div>
+        </div>
+
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <i class="fa fa-bars btn" id="menu-toggle"></i>
+                @*<button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>*@
+                <h2 class="mx-auto" style="font-weight:800">@ViewBag.Title</h2>
+            </nav>
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- JavaScript -->
+    <script src="~/Content/TranKhangDI_css/jquery/jquery-3.7.1.min.js"></script>
+    <script src="~/Content/TranKhangDI_css/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+</body>
+</html>

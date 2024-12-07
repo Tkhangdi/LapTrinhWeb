@@ -1,0 +1,69 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "DangKy_NguoiDung";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <link rel="icon" href="~/imgs/LOGO-removebg-preview.png" type="images/x-icon">
+    <link href="~/Content/TranKhangDI_css/LoginNguoiDung_css/DangKyNguoiDung.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="hero">
+        <div class="form-box">
+
+            <div style="padding-top:20px;text-align:center">
+                <p style="font-size:35px;font-weight:600">ĐĂNG KÝ</p>
+            </div>
+
+            <div class="social-icon">
+                <i class="fa-brands fa-google fa-xl" style="cursor: pointer;"></i>
+                <i class="fa-brands fa-facebook fa-xl" style="cursor: pointer;"></i>
+                <i class="fa-brands fa-github fa-xl" style="cursor: pointer;"></i>
+            </div>
+
+
+            <form action="@Url.Action("DangKy_NguoiDung", "DangNhap")" class="input-group" method="post" style="padding-top:0px;margin-top:0px">
+                <div style="padding-left:70px">
+                    <input type="text" name="ho" class="input-field" placeholder="Họ" required />
+                    <input type="text" name="ten" class="input-field" placeholder="Tên" required />
+                    <div class="gender-selection" style="align-items:center;padding-top:10px">
+                        <label style="font-size:14px;color:#808080">Giới tính:</label>
+                        <input type="radio" id="nam" name="gioitinh" value="Nam" required>
+                        <label for="nam" style="font-size:13px;color:#808080">Nam</label>
+                        <input type="radio" id="nu" name="gioitinh" value="Nữ" required>
+                        <label for="nu" style="font-size:13px;color:#808080">Nữ</label>
+                    </div>
+                    <input type="email" id="register_email" name="register_email" class="input-field" placeholder="Email" required />
+                    <input type="number" name="sodienthoai" class="input-field" placeholder="Số điện thoại" required />
+                    <input type="text" name="diachi" class="input-field" placeholder="Địa chỉ" required />
+                    <input type="text" name="tendangnhap" class="input-field" placeholder="Tên đăng nhập" required />
+                    <input type="password" id="matkhau" name="matkhau" class="input-field" placeholder="Nhập mật khẩu" required />
+                    <button type="submit" class="submit-btn">Đăng ký</button>
+                    @if (ViewBag.RegisterErrorMessage != null)
+                    {
+                        <p style="color:red">@ViewBag.RegisterErrorMessage</p>
+                    }
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+
+

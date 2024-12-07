@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+
+    <!-- Inline CSS -->
+    <style>
+       
+        .ct_container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 50px;
+        }
+
+            .ct_container:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+            }
+
+        .image-section {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e9ecef;
+        }
+
+            .image-section img {
+                width: 100%;
+                max-width: 400px;
+                height: auto;
+                border-radius: 10px;
+                transition: transform 0.3s;
+            }
+
+                .image-section img:hover {
+                    transform: scale(1.05);
+                }
+
+        .info-section {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            background-color: #ffffff;
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #343a40;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin: 8px 0;
+            color: #495057;
+        }
+
+        strong {
+            color: #007bff;
+        }
+
+        p {
+            font-size: 16px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ct_container">
+        <div class="image-section">
+            @if (ViewBag.CT.Anh != null)
+            {
+                <img src="~/images/QuanAo/@ViewBag.CT.Anh" alt="@ViewBag.CT.TenSanPham" />
+            }
+        </div>
+        <div class="info-section">
+            <p><strong>Mã đơn hàng</strong>: @Model.MaChiTietDonHang</p>
+            <h1>Thông tin chi tiết đơn hàng:</h1>
+            <h3><strong>Tên sản phẩm</strong>: @ViewBag.CT.TenSanPham</h3>
+            <h3><strong>Tên Danh mục</strong>: @ViewBag.TenDM</h3>
+            <h3><strong>Tên thương hiệu</strong>: @ViewBag.TenTH</h3>
+            <h3><strong>Giá bán</strong>: @ViewBag.CT.Gia.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"))đ</h3>
+            <h3><strong>Mô tả</strong>: @ViewBag.CT.MoTa</h3>
+        </div>
+    </div>
+
+</body>
+</html>

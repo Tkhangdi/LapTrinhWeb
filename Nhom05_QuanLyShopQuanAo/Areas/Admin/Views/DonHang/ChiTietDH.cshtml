@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "Thông tin đơn hàng";
+}
+
+@model Nhom05_QuanLyShopQuanAo.Models.DonHang
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .order-info {
+            margin-bottom: 40px;
+        }
+
+        .pDH {
+            margin: 5px 0;
+        }
+
+        .button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+            .button:hover {
+                background-color: #218838;
+            }
+    </style>
+</head>
+<body class="donhang">
+    <div class="dh_header">
+    </div>
+
+    <div class="order-info">
+        <table class="table">
+            <tr>
+                <th>Mã Đơn Hàng</th>
+                <td>@Model.MaDonHang</td>
+            </tr>
+            <tr>
+                <th>Mã Khách Hàng</th>
+                <td>@Model.MaKhachHang</td>
+            </tr>
+            <tr>
+                <th>Tên Khách Hàng</th>
+                <td>@ViewBag.TenKH</td>
+            </tr>
+            @*<tr>
+                    <th>Mã Nhân Viên</th>
+                    <td>@Model.MaNhanVien</td>
+                </tr>
+                <tr>
+                    <th>Tên Nhân Viên</th>
+                    <td>@ViewBag.TenNV</td>
+                </tr>*@
+            <tr>
+                <th>Thời Gian Đặt</th>
+                <td>@Model.NgayDat</td>
+            </tr>
+            <tr>
+                <th>Địa Chỉ Giao Hàng</th>
+                <td>@Model.DiaChiGiaoHang</td>
+            </tr>
+            <tr>
+                <th>Trạng Thái Đơn Hàng</th>
+                <td>
+                    <form method="post" action="@Url.Action("ChiTietDH", "DonHang", new { id = Model.MaDonHang })" onsubmit="return confirmChange();">
+                        <label for="trangThai" style="padding-right:10px">@Model.TrangThaiDonHang</label>
+                        @if (Model.TrangThaiDonHang != "Đã xác nhận" && Model.TrangThaiDonHang != "Đã hủy")
+                        {
+                            <button type="submit" class="button">Xác nhận đơn hàng</button>
+                        }
+                        <br />
+                        @if (ViewBag.tb != null)
+                        {
+                            <h5>@ViewBag.tb</h5>
+                        }
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <h1 style="margin-top: 40px; text-align: center;"><strong>Các mặt hàng được đặt:</strong></h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Mã Hàng</th>
+                <th>Mã Sản Phẩm</th>
+                <th>Số Lượng</th>
+                <th>Giá</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ctdonHang in ViewBag.ChiTietList)
+            {
+                <tr>
+                    <td>@ctdonHang.MaChiTietDonHang</td>
+                    <td>@ctdonHang.MaSanPham</td>
+                    <td>@ctdonHang.SoLuong</td>
+                    <td><span style="color: red; font-size: 15px;">@ctdonHang.GiaDonVi.ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"))đ</span></td>
+                    <td><a href="@Url.Action("ChiTiet", "DonHang", new { id = ctdonHang.MaChiTietDonHang })" class="donhang-view-details">Xem Chi Tiết</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script>
+        function confirmChange() {
+            return confirm("Bạn có chắc muốn thay đổi trạng thái này không?");
+        }
+    </script>
+</body>
+</html>

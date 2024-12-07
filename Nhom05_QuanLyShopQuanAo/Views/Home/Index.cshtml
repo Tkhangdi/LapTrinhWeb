@@ -1,0 +1,300 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model List<Nhom05_QuanLyShopQuanAo.Models.SanPham>
+<div class="main_slider" style="background-image:url(images/QuanAo/slider_1.jpg)">
+    <div class="container fill_height">
+        <div class="row align-items-center fill_height">
+            <div class="col">
+                <div class="main_slider_content">
+                    <h6>Spring / Summer Collection 2017</h6>
+                    <h1>Get up to 30% Off New Arrivals</h1>
+                    <div class="red_button shop_now_button"><a href="#">shop now</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/1.css" rel="stylesheet" type="text/css" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link href="~/Content/TranKhangDI_css/css/SanPham.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div class="custom-container">
+        <div class="container">
+            <div class="wrapper-heading-home">
+                <h2 class="subheading" style="margin-top:30px;margin-bottom:30px">SẢN PHẨM </h2>
+                <div class="tab-title">
+                    <ul class="box-tabs tabbernav_product" id="ajax-tab-collection">
+                        <li style="padding-right:30px">
+                            <a href="#tab1" data-toggle="tab" class="tab-link" style="background-color:#f66f6f" data-handle="ao-khoac">Áo</a>
+                        </li>
+                        <li style="padding-right:30px">
+                            <a href="#tab2" data-toggle="tab" class="tab-link" style="background-color:#f66f6f" data-handle="ao-thun">Quần</a>
+                        </li>
+                        <li style="padding-right:30px">
+                            <a href="#tab3" data-toggle="tab" class="tab-link" style="background-color:#f66f6f" data-handle="quan-short">Áo Khoác</a>
+                        </li>
+                        <li style="padding-right:30px">
+                            <a href="#tab4" data-toggle="tab" class="tab-link" style="background-color:#f66f6f" data-handle="so-mi">Đồ thể thao</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-content tabs-products">
+                <!-- Tab 1 -->
+                <div class="tab-item active" id="tab1">
+                    <div class="listProduct-carousel--overflow">
+                        <div class="custom-nav" style="padding-bottom:5px">
+                            <span class="prev"><i class="fa-solid fa-forward fa-rotate-180 fa-xl"></i></span>
+                            <span class="next" style="float:right"><i class="fa-solid fa-forward fa-xl"></i></span>
+                        </div>
+                        <div class="product-grid">
+                            @foreach (var product in ViewBag.Tab1Products)
+                            {
+                                <div class="product-card">
+                                    <div class="product-image">
+                                        <a href="@Url.Action("DetailSanPham", "Home", new { id = product.MaSanPham })">
+                                            <img src="/images/QuanAo/@product.Anh" alt="@product.TenSanPham" />
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h3 class="product-title">@product.TenSanPham</h3>
+                                        <p class="product-price">@String.Format("{0:0,00} đ", product.Gia)</p>
+                                        <a href="@Url.Action("DetailSanPham", "Home", new { id = product.MaSanPham })" class="btn btn-primary">
+                                            Xem chi tiết
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Tab 2 -->
+                <div class="tab-item" id="tab2">
+                    <div class="listProduct-carousel--overflow">
+                        <div class="custom-nav" style="padding-bottom:5px">
+                            <span class="prev"><i class="fa-solid fa-forward fa-rotate-180 fa-xl"></i></span>
+                            <span class="next" style="float:right"><i class="fa-solid fa-forward fa-xl"></i></span>
+                        </div>
+                        <div class="product-grid">
+                            @foreach (var product in ViewBag.Tab2Products)
+                            {
+                                <div class="product-card">
+                                    <div class="product-image">
+                                        <a href="@Url.Action("DetailSanPham", "Home", new { id = product.MaSanPham })">
+                                            <img src="/images/QuanAo/@product.Anh" alt="@product.TenSanPham" />
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h3 class="product-title">@product.TenSanPham</h3>
+                                        <p class="product-price">@String.Format("{0:0,00} đ", product.Gia)</p>
+                                        <a href="@Url.Action("DetailSanPham", "Home", new { id = product.MaSanPham })" class="btn btn-primary">
+                                            Xem chi tiết
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Tab 3 -->
+                <div class="tab-item" id="tab3">
+                    <div class="listProduct-carousel--overflow">
+                        <div class="custom-nav" style="padding-bottom:5px">
+                            <span class="prev"><i class="fa-solid fa-forward fa-rotate-180 fa-xl"></i></span>
+                            <span class="next" style="float:right"><i class="fa-solid fa-forward fa-xl"></i></span>
+                        </div>
+                        <div class="product-grid">
+                            @foreach (var product in ViewBag.Tab3Products)
+                            {
+                                <div class="product-card">
+                                    <div class="product-image">
+                                        <a href="@Url.Action("DetailSanPham", "Home", new { id = product.MaSanPham })">
+                                            <img src="/images/QuanAo/@product.Anh" alt="@product.TenSanPham" />
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h3 class="product-title">@product.TenSanPham</h3>
+                                        <p class="product-price">@String.Format("{0:0,00} đ", product.Gia)</p>
+                                        <a href="@Url.Action("DetailSanPham", "Home", new { id = product.MaSanPham })" class="btn btn-primary">
+                                            Xem chi tiết
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Tab 4 -->
+                <div class="tab-item" id="tab4">
+                    <div class="listProduct-carousel--overflow">
+                        <div class="custom-nav" style="padding-bottom:5px">
+                            <span class="prev"><i class="fa-solid fa-forward fa-rotate-180 fa-xl"></i></span>
+                            <span class="next" style="float:right"><i class="fa-solid fa-forward fa-xl"></i></span>
+                        </div>
+                        <div class="product-grid">
+                            @foreach (var product in ViewBag.Tab4Products)
+                            {
+                                <div class="product-card">
+                                    <div class="product-image">
+                                        <a href="@Url.Action("DetailSanPham", "Home", new { id = product.MaSanPham })">
+                                            <img src="/images/QuanAo/@product.Anh" alt="@product.TenSanPham" />
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h3 class="product-title">@product.TenSanPham</h3>
+                                        <p class="product-price">@String.Format("{0:0,00} đ", product.Gia)</p>
+                                        <a href="@Url.Action("DetailSanPham", "Home", new { id = product.MaSanPham })" class="btn btn-primary">
+                                            Xem chi tiết
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        @*Thêm một vài thứ*@
+        <!-- Sản phẩm nổi bật -->
+        <div class="container">
+            <h2 class="subheading" style="margin-top:50px; margin-bottom:30px">SẢN PHẨM NỔI BẬT</h2>
+            <div class="featured-product-carousel owl-carousel">
+                @foreach (var product in ViewBag.FeaturedProducts)
+                {
+                    <div class="product-card">
+                        <div class="product-image">
+                            <a href="@Url.Action("DetailSanPham", "Home", new { id = product.MaSanPham })">
+                                <img src="/images/QuanAo/@product.Anh" alt="@product.TenSanPham" />
+                            </a>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">@product.TenSanPham</h3>
+                            <p class="product-price">@String.Format("{0:0,00} đ", product.Gia)</p>
+                            <a href="@Url.Action("DetailSanPham", "Home", new { id = product.MaSanPham })" class="btn btn-primary">
+                                Xem chi tiết
+                            </a>
+                        </div>
+                    </div>  }
+            </div>
+        </div>
+
+        <!-- Giới thiệu về shop -->
+        <div class="container about-section" style="margin-top:50px; padding:30px; background-color:#f9f9f9; border-radius:10px; text-align:center;">
+            <h2>Giới thiệu về Shop</h2>
+            <p style="font-size:16px; color:#555; line-height:1.8;">
+                Chào mừng bạn đến với Shop Quần Áo! Chúng tôi cung cấp các sản phẩm thời trang chất lượng cao,
+                cập nhật xu hướng mới nhất. Hãy chọn lựa và tận hưởng trải nghiệm mua sắm tuyệt vời!
+            </p>
+            <img src="/images/QuanAo/about-banner.jpg" alt="Giới thiệu Shop" style="width:100%; max-height:300px; object-fit:cover; margin-top:20px; border-radius:10px;">
+        </div>
+
+        <!-- Form đăng ký nhận tin -->
+        <div class="container newsletter-section" style="margin-top:50px; padding:30px; background-color:#007bff; border-radius:10px; text-align:center; color:#fff;">
+            <h2>Đăng ký nhận ưu đãi</h2>
+            <p>Nhập email để nhận thông báo về các chương trình khuyến mãi đặc biệt!</p>
+            <form action="/Home/Subscribe" method="post" style="margin-top:20px;">
+                <input type="email" name="email" placeholder="Nhập email của bạn" style="padding:10px; width:50%; border:none; border-radius:5px;" required />
+                <button type="submit" style="padding:10px 20px; margin-left:10px; background-color:#fff; color:#007bff; border:none; border-radius:5px; cursor:pointer;">
+                    Đăng ký
+                </button>
+            </form>
+        </div>
+
+        <!-- Liên hệ nhanh -->
+        <div class="container contact-section" style="margin-top:50px; padding:30px; background-color:#333; border-radius:10px; text-align:center; color:#fff;">
+            <h2>Liên hệ với chúng tôi</h2>
+            <p>Số điện thoại: <strong>0123-456-789</strong></p>
+            <p>Email: <strong>info@shopqa.com</strong></p>
+            <div style="margin-top:20px;">
+                <a href="#" style="margin-right:10px;"><img src="/images/icons/facebook.png" alt="Facebook" style="width:30px;"></a>
+                <a href="#"><img src="/images/icons/instagram.png" alt="Instagram" style="width:30px;"></a>
+                <a href="#"><img src="/images/icons/twitter.png" alt="Twitter" style="width:30px;"></a>
+            </div>
+        </div>
+        @*End thêm một vài thứ*@
+
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('.featured-product-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                responsive: {
+                    0: { items: 1 },
+                    600: { items: 2 },
+                    1000: { items: 3 }
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false, // Disable default navigation
+                responsive: {
+                    0: { items: 1 },
+                    600: { items: 2 },
+                    1000: { items: 3 },
+                    1200: { items: 4 }
+                }
+            });
+
+            // Add custom navigation buttons
+            $('.custom-nav .prev').on('click', function () {
+                $('.owl-carousel').trigger('prev.owl.carousel');
+            });
+
+            $('.custom-nav .next').on('click', function () {
+                $('.owl-carousel').trigger('next.owl.carousel');
+            });
+
+            // Tab switching
+            $('.tab-link').on('click', function (e) {
+                e.preventDefault();
+                $('.tab-link').parent().removeClass('active');
+                $(this).parent().addClass('active');
+                var targetTab = $(this).attr('href');
+                $('.tab-item').hide();
+                $(targetTab).show();
+            });
+
+            // Display default tab
+            $('.tab-item').hide();
+            $('#tab1').show();
+        });
+    </script>
+</body>
+</html>

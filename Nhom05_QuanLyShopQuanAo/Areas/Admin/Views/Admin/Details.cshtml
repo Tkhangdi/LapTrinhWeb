@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+}
+
+@model Nhom05_QuanLyShopQuanAo.Models.NhanVien
+
+<h2>Chi Tiết Nhân Viên</h2>
+
+<div>
+    <h4>Thông Tin Nhân Viên</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Tên Đăng Nhập
+        </dt>
+        <dd class="col-sm-10">
+            @Model.TenDangNhap
+        </dd>
+
+        <dt class="col-sm-2">
+            Họ
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Ho
+        </dd>
+
+        <dt class="col-sm-2">
+            Tên
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Ten
+        </dd>
+
+        <dt class="col-sm-2">
+            Giới Tính
+        </dt>
+        <dd class="col-sm-10">
+            @Model.GioiTinh
+        </dd>
+
+        <dt class="col-sm-2">
+            Email
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Email
+        </dd>
+
+        <dt class="col-sm-2">
+            Điện Thoại
+        </dt>
+        <dd class="col-sm-10">
+            @Model.DienThoai
+        </dd>
+
+        <dt class="col-sm-2">
+            Chức Vụ
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ChucVu
+        </dd>
+    </dl>
+</div>
+
+
+<!-- Nút Xóa -->
+<div>
+    @using (Html.BeginForm("DeleteConfirmed", "Admin", FormMethod.Post))
+    {
+@Html.AntiForgeryToken()
+                <input type="hidden" name="id" value="@Model.TenDangNhap" />
+                                <input type="submit" value="Xóa" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa nhân viên này?');" />}
+    <a href="@Url.Action("Index", "Admin")" class="btn btn-secondary" style="margin-top:10px">Quay lại</a>
+</div>
+
+
+
+

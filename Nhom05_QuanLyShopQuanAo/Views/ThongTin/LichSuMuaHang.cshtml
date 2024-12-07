@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Nhom05_QuanLyShopQuanAo.Models.DonHang>
+
+@{
+    ViewBag.Title = "LichSuMuaHang";
+}
+
+
+
+
+
+<div class="container" style="margin-top:200px">
+    <h2>LỊCH SỬ MUA HÀNG</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-info">
+            @TempData["Message"]
+        </div>}
+
+
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Mã khách hàng
+            </th>
+            <th>
+                Ngày đặt
+            </th>
+            <th>
+                Địa chỉ giao hàng
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th>
+                Tổng tiền
+            </th>
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaKhachHang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayDat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChiGiaoHang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrangThaiDonHang)
+                </td>
+                <td>
+                    @string.Format("{0:0,00} đ", item.TongTien)
+                </td>
+                <td>
+                    <a href="~/ThongTin/ChiTietDonHang/@item.MaDonHang" class="btn btn-success">Chi tiết</a>
+
+                    @if (item.TrangThaiDonHang != "Đã xác nhận" && item.TrangThaiDonHang != "Đã hủy")
+                    {
+                        <a href="@Url.Action("HuyDon", "ThongTin", new { id = item.MaDonHang })" class="btn btn-danger">Hủy đơn</a>
+                    }
+                </td>
+            </tr>
+        }
+
+
+    </table>
+</div>

@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Chọn Sản Phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    h2 {
+        color: #007bff;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+</style>
+
+<form method="post" action="/Admin/QuanLyKhoHang/ChonSanPham">
+    <div class="form-group">
+        <label for="MaDanhMuc">Chọn Danh Mục:</label>
+        <select id="MaDanhMuc" name="MaDanhMuc" class="form-control">
+            <option value="">Tất cả</option>
+            @foreach (var danhMuc in ViewBag.DanhMuc)
+            {
+                <option value="@danhMuc.MaDanhMuc">@danhMuc.TenDanhMuc</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Mã Sản Phẩm</td>
+            <td>Tên Sản Phẩm</td>
+            <td>Danh Mục</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sp in Model)
+        {
+            <tr>
+                <td>@sp.MaSanPham</td>
+                <td>@sp.TenSanPham</td>
+                <td>@sp.DanhMuc</td>
+                <td><a href="@Url.Action("AddKhoHang", "QuanLyKhoHang" ,new { id = sp.MaSanPham })">Thêm</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,45 @@
+﻿@model Nhom05_QuanLyShopQuanAo.Models.SanPham
+@{
+    ViewBag.Title = "Thêm Sản Phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <form method="post" action="/Admin/QuanLyKhoHang/AddKhoHang" class="bg-light p-4 rounded shadow-sm">
+        <div class="mb-3">
+            <label for="MaSanPham" class="form-label">Mã sản phẩm:</label>
+            <input type="text" id="MaSanPham" class="form-control" value="@Model.MaSanPham" disabled>
+            <input type="hidden" name="MaSanPham" value="@Model.MaSanPham">
+        </div>
+
+
+        <div class="mb-3">
+            <label for="TenSanPham" class="form-label">Tên sản phẩm:</label>
+            <input type="text" id="TenSanPham" class="form-control" value="@Model.TenSanPham" disabled>
+        </div>
+
+        <div class="mb-3">
+            <label for="DanhMuc" class="form-label">Danh mục:</label>
+            <input type="text" id="DanhMuc" class="form-control" value="@ViewBag.DanhMuc" disabled>
+        </div>
+
+        <div class="mb-3">
+            <label for="Size" class="form-label">Chọn size:</label>
+            <select id="Size" name="Size" class="form-select">
+                @foreach (var size in ViewBag.Size)
+                {
+                    <option value="@size.MaSize">@size.MaSize</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="SoLuong" class="form-label">Số lượng:</label>
+            <input type="number" id="SoLuong" name="SoLuong" class="form-control" min="1">
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <input type="submit" class="btn btn-primary" value="Xác nhận" />
+        </div>
+    </form>
+</div>

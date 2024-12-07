@@ -1,0 +1,178 @@
+﻿@model IEnumerable<Nhom05_QuanLyShopQuanAo.Models.GioHang>
+@using Nhom05_QuanLyShopQuanAo.Models
+    <style>
+        .map {
+            margin: 20px 0;
+        }
+
+        .branches {
+            margin-top: 20px;
+        }
+
+        .branch {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            transition: border-color 0.3s; /* Thêm hiệu ứng chuyển tiếp cho viền */
+        }
+
+            .branch:hover {
+                border-color: #007bff; /* Màu xanh biển khi di chuột vào */
+            }
+
+        .social-media {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+            .social-media h4,
+            .social-media p {
+                color: #f57c00; /* Màu cam */
+            }
+
+        .feedback-form {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+            .feedback-form h4 {
+                text-align: center;
+            }
+
+        .btn-danger {
+            background-color: red; /* Màu đỏ */
+            border: none;
+        }
+
+        /* Định dạng cho biểu tượng */
+        .contact-info i {
+            margin-right: 10px; /* Khoảng cách giữa icon và chữ */
+            color: #007bff; /* Màu xanh biển cho icon */
+        }
+
+        .contact-info-wrapper {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+
+
+<body>
+    <div class="container" style="padding-top:200px">
+
+        <h2 class="text-center">Liên Hệ Chúng Tôi</h2> <!-- Căn giữa tiêu đề -->
+
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-success">@ViewBag.Message</div>
+        }
+
+        <div class="row contact-info-wrapper">
+            <!-- Thông tin liên hệ về shop -->
+            <div class="col-md-4 contact-info">
+                <h4>Thông Tin Liên Hệ</h4>
+                <p><i class="fas fa-phone"></i> <strong>Điện Thoại:</strong> (012) 345-6789</p>
+                <p><i class="fas fa-envelope"></i> <strong>Email:</strong> contact@shop.com</p>
+                <p><i class="fas fa-clock"></i> <strong>Giờ Mở Cửa:</strong> Thứ Hai - Thứ Sáu: 9:00 - 18:00</p>
+            </div>
+
+            <!-- Trợ Giúp -->
+            <div class="col-md-4 contact-info">
+                <h4>Trợ Giúp</h4>
+                <p><i class="fas fa-sync-alt"></i> Chính sách đổi trả</p>
+                <p><i class="fas fa-headset"></i> Phương thức hỗ trợ</p>
+                <p><i class="fas fa-clipboard-list"></i> Quy định sử dụng</p>
+                <p><i class="fas fa-lock"></i> Chính sách bảo mật</p>
+            </div>
+
+            <!-- Hợp tác -->
+            <div class="col-md-4 contact-info">
+                <h4>Hợp Tác</h4>
+                <p><i class="fas fa-info-circle"></i> Liên hệ hợp tác</p>
+                <p><i class="fas fa-phone"></i> Tel: 0909 22 66</p>
+                <p><i class="fas fa-envelope"></i> Email: hoptac@shop.com</p>
+                <p><i class="fas fa-percent"></i> Chính sách chiết khấu</p>
+            </div>
+        </div>
+
+        <!-- Bản đồ -->
+        <div class="map text-center">
+            <h4>Địa Điểm Của Chúng Tôi</h4>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.123456789!2d106.123456!3d10.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752a123456789%3A0x1234567890abcdef!2zMTIzIMSRw6FuaCBhY2NhZCwgUGhhbiBIw6AgU8OjbmcgQ0hNTg!5e0!3m2!1svi!2s!4v1634567890123" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <!-- Chi nhánh -->
+        <div class="branches">
+            <h4>Chi Nhánh Của Chúng Tôi</h4>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="branch">
+                        <h5>Chi Nhánh 1</h5>
+                        <p><strong>Địa Chỉ:</strong> 123 Đường ABC, Quận XYZ, TP HCM</p>
+                        <p><strong>Điện Thoại:</strong> (012) 345-6789</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="branch">
+                        <h5>Chi Nhánh 2</h5>
+                        <p><strong>Địa Chỉ:</strong> 456 Đường DEF, Quận UVW, TP HCM</p>
+                        <p><strong>Điện Thoại:</strong> (098) 765-4321</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="branch">
+                        <h5>Chi Nhánh 3</h5>
+                        <p><strong>Địa Chỉ:</strong> 789 Đường GHI, Quận RST, TP HCM</p>
+                        <p><strong>Điện Thoại:</strong> (012) 345-6780</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mạng xã hội -->
+        <div class="social-media">
+            <h4>Kết Nối Với Chúng Tôi</h4>
+            <p>Theo dõi chúng tôi trên mạng xã hội để nhận thông tin mới nhất và khuyến mãi!</p>
+        </div>
+
+        <!-- Form liên hệ -->
+        <div class="feedback-form">
+            <h4>Thông Tin Phản Hồi</h4>
+            <form method="post" action="@Url.Action("SubmitContact", "Home")">
+                <div class="form-group">
+                    <label for="name">Tên:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Số Điện Thoại:</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]*" required title="Vui lòng nhập số điện thoại hợp lệ.">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Tin nhắn:</label>
+                    <textarea class="form-control" id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-danger d-block mx-auto">Gửi</button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+
+    
+
+
+
+    <script src="~/Content/TranKhangDI_css/js/bootstrap.bundle.js"></script>
+    <script src="~/Content/TranKhangDI_css/js/bootstrap.min.js"></script>
+
+</body>
+</html>

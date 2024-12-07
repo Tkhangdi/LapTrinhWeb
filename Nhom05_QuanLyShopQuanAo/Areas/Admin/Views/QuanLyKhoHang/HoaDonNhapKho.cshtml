@@ -1,0 +1,23 @@
+﻿@model Nhom05_QuanLyShopQuanAo.Models.SanPham
+@{
+    ViewBag.Title = "Hoá đơn nhập kho";
+}
+
+<div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;">
+    <div style="margin-bottom: 20px;">
+        <p><strong>Nhân viên:</strong> @ViewBag.NhanVien</p>
+        <p><strong>Mã Sản Phẩm:</strong> @Model.MaSanPham</p>
+        <p><strong>Tên Sản Phẩm:</strong> @Model.TenSanPham</p>
+        <p><strong>Size:</strong> @ViewBag.Size</p>
+        <p><strong>Số Lượng:</strong> @ViewBag.SoLuong</p>
+        <p><strong>Tổng giá nhập:</strong> @ViewBag.TongGia</p>
+        <p><strong>Ngày nhập:</strong> @ViewBag.NgayNhap</p>
+    </div>
+
+    <div style="text-align: center;">
+        <form method="post">
+            <button type="submit" style="padding: 8px 16px; margin: 0 5px; border: none; border-radius: 3px; cursor: pointer; background-color: #007bff; color: #fff;">Xác nhận</button>
+            <a href="@Url.Action("AddKhoHang", "QuanLyKhoHang", new { id = Model.MaSanPham })" style="padding: 8px 16px; margin: 0 5px; border: none; border-radius: 3px; cursor: pointer; background-color: #6c757d; color: #fff;">Hủy</a>
+        </form>
+    </div>
+</div>

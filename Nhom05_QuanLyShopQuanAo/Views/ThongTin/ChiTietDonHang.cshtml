@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Nhom05_QuanLyShopQuanAo.Models.ChiTietDonHang>
+
+@{
+    ViewBag.Title = "ChiTietDonHang";
+}
+
+
+
+
+<div class=" container" style="margin-top: 200px">
+    <h2>Chi tiết đơn hàng</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaDonHang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaSanPham)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaDonVi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThanhTien)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaDonHang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSanPham)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaDonVi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSize)
+                </td>
+                <td>
+                   @string.Format("{0:0,00} đ",item.GiaDonVi)
+                </td>
+            </tr>
+        }
+    </table>
+</div>

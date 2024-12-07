@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Nhom05_QuanLyShopQuanAo.Models.ThuongHieu>
+
+@{
+    ViewBag.Title = "Quản Lý Thương Hiệu";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+
+    <div class="d-flex justify-content-between mt-3">
+        <p>
+            @Html.ActionLink("Tạo thương hiệu mới", "TaoTH", "QLTH", null, new { @class = "btn btn-success" })
+        </p>
+
+        <div>
+            <a class="btn btn-sm btn-info" href="@Url.Action("HienThiSanPham", "QLSP")">Quản lý Sản Phẩm</a>
+            <a class="btn btn-sm btn-info" href="@Url.Action("HienThiDanhMuc", "QLDM")">Quản lý Danh Mục</a>
+        </div>
+    </div>
+
+
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Mã thương hiệu
+                </th>
+                <th>
+                    Tên thương hiệu
+                </th>
+                <th>hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaThuongHieu)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenThuongHieu)
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="@Url.Action("CapNhatTH", new { MaThuongHieu = item.MaThuongHieu })">Cập nhật</a>
+                        @*<a class="btn btn-sm btn-danger" href="@Url.Action("XoaTH", new { MaThuongHieu = item.MaThuongHieu })">Xóa</a>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+
+
+
+
