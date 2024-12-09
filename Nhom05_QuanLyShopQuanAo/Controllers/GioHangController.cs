@@ -93,52 +93,71 @@ namespace Nhom05_QuanLyShopQuanAo.Controllers
 
 
         //Tạo mã đơn hàng tự động
+        //private string GenerateMaDonHang()
+        //{
+        //    string datePart = DateTime.Now.ToString("yyyyMMdd"); // Phần ngày hiện tại theo định dạng YYYYMMDD
+        //    string prefix = "DH" + datePart; // Tiền tố mã đơn hàng
+        //    int lastNumber = 1; // Số thứ tự mặc định
+
+        //    // Tìm mã đơn hàng có số thứ tự cao nhất trong ngày hiện tại
+        //    var lastOrder = db.DonHangs
+        //        .Where(d => d.MaDonHang.StartsWith(prefix))
+        //        .OrderByDescending(d => d.MaDonHang)
+        //        .FirstOrDefault();
+
+        //    if (lastOrder != null)
+        //    {
+        //        // Lấy số thứ tự cuối cùng từ mã đơn hàng và tăng lên 1
+        //        string lastCode = lastOrder.MaDonHang;
+        //        lastNumber = int.Parse(lastCode.Substring(prefix.Length)) + 1;
+        //    }
+
+        //    // Tạo mã đơn hàng mới với hai chữ số cho số thứ tự
+        //    return prefix + lastNumber.ToString();
+        //}
+
         private string GenerateMaDonHang()
         {
-            string datePart = DateTime.Now.ToString("yyyyMMdd"); // Phần ngày hiện tại theo định dạng YYYYMMDD
-            string prefix = "DH" + datePart; // Tiền tố mã đơn hàng
-            int lastNumber = 1; // Số thứ tự mặc định
-
-            // Tìm mã đơn hàng có số thứ tự cao nhất trong ngày hiện tại
-            var lastOrder = db.DonHangs
-                .Where(d => d.MaDonHang.StartsWith(prefix))
-                .OrderByDescending(d => d.MaDonHang)
-                .FirstOrDefault();
-
-            if (lastOrder != null)
-            {
-                // Lấy số thứ tự cuối cùng từ mã đơn hàng và tăng lên 1
-                string lastCode = lastOrder.MaDonHang;
-                lastNumber = int.Parse(lastCode.Substring(prefix.Length)) + 1;
-            }
-
-            // Tạo mã đơn hàng mới với hai chữ số cho số thứ tự
-            return prefix + lastNumber.ToString();
+            string datePart = DateTime.Now.ToString("yyyyMMddHHmmssfff"); // Ngày và thời gian đến mili giây
+            return $"DH{datePart}"; // Ví dụ: DH202312091230456
         }
+
+
+
 
         //Tạo mã chi tiết đơn hàng tự động
-        private string GenerateMaChiTietDonHang()
+        //private string GenerateMaChiTietDonHang()
+        //{
+        //    string datePart = DateTime.Now.ToString("yyyyMMdd"); // Phần ngày hiện tại theo định dạng YYYYMMDD
+        //    string prefix = "CTDH" + datePart; // Tiền tố mã chi tiết đơn hàng
+        //    int lastNumber = 1; // Số thứ tự mặc định
+
+        //    // Tìm mã chi tiết đơn hàng có số thứ tự cao nhất trong ngày hiện tại
+        //    var lastDetail = db.ChiTietDonHangs
+        //        .Where(d => d.MaChiTietDonHang.StartsWith(prefix))
+        //        .OrderByDescending(d => d.MaChiTietDonHang)
+        //        .FirstOrDefault();
+
+        //    if (lastDetail != null)
+        //    {
+        //        // Lấy số thứ tự cuối cùng từ mã chi tiết đơn hàng và tăng lên 1
+        //        string lastCode = lastDetail.MaChiTietDonHang;
+        //        lastNumber = int.Parse(lastCode.Substring(prefix.Length)) + 1;
+        //    }
+
+        //    // Tạo mã chi tiết đơn hàng mới với hai chữ số cho số thứ tự
+        //    return prefix + lastNumber.ToString();
+        //}
+
+        private string GenerateMaChiTietDonHang(string maDonHang, int sequence)
         {
-            string datePart = DateTime.Now.ToString("yyyyMMdd"); // Phần ngày hiện tại theo định dạng YYYYMMDD
-            string prefix = "CTDH" + datePart; // Tiền tố mã chi tiết đơn hàng
-            int lastNumber = 1; // Số thứ tự mặc định
-
-            // Tìm mã chi tiết đơn hàng có số thứ tự cao nhất trong ngày hiện tại
-            var lastDetail = db.ChiTietDonHangs
-                .Where(d => d.MaChiTietDonHang.StartsWith(prefix))
-                .OrderByDescending(d => d.MaChiTietDonHang)
-                .FirstOrDefault();
-
-            if (lastDetail != null)
-            {
-                // Lấy số thứ tự cuối cùng từ mã chi tiết đơn hàng và tăng lên 1
-                string lastCode = lastDetail.MaChiTietDonHang;
-                lastNumber = int.Parse(lastCode.Substring(prefix.Length)) + 1;
-            }
-
-            // Tạo mã chi tiết đơn hàng mới với hai chữ số cho số thứ tự
-            return prefix + lastNumber.ToString();
+            string prefix = maDonHang; // Dùng mã đơn hàng làm tiền tố
+            return $"{prefix}-CT{sequence:D3}"; // Ví dụ: DH20231209-CT001
         }
+
+
+
+
 
 
 
@@ -198,11 +217,12 @@ namespace Nhom05_QuanLyShopQuanAo.Controllers
             db.DonHangs.InsertOnSubmit(dh);
             db.SubmitChanges();
 
+            int sequence = 1; // Biến đếm số thứ tự để sinh mã duy nhất
 
-            foreach(var item in gh.lst)
+            foreach (var item in gh.lst)
             {
                 ChiTietDonHang ct = new ChiTietDonHang();
-                ct.MaChiTietDonHang = GenerateMaChiTietDonHang();
+                ct.MaChiTietDonHang = GenerateMaChiTietDonHang(dh.MaDonHang, sequence);
                 ct.MaDonHang = dh.MaDonHang;
                 ct.MaSanPham = item.MaSanPham;
                 ct.SoLuong = item.SoLuong;
@@ -211,6 +231,7 @@ namespace Nhom05_QuanLyShopQuanAo.Controllers
                 ct.ThanhTien = decimal.Parse(item.ThanhTien.ToString());
                 db.ChiTietDonHangs.InsertOnSubmit(ct);
                 db.SubmitChanges();
+                sequence++;
             }
 
             gh.lst.Clear();
@@ -275,11 +296,13 @@ namespace Nhom05_QuanLyShopQuanAo.Controllers
             db.DonHangs.InsertOnSubmit(dh);
             db.SubmitChanges();
 
+            int sequence = 1; // Biến đếm số thứ tự để sinh mã duy nhất
+
             foreach (var item in gioHang.lst)
             {
                 ChiTietDonHang ct = new ChiTietDonHang
                 {
-                    MaChiTietDonHang = GenerateMaChiTietDonHang(),
+                    MaChiTietDonHang = GenerateMaChiTietDonHang(dh.MaDonHang, sequence),
                     MaDonHang = dh.MaDonHang,
                     MaSanPham = item.MaSanPham,
                     SoLuong = item.SoLuong,
@@ -289,7 +312,11 @@ namespace Nhom05_QuanLyShopQuanAo.Controllers
                 };
 
                 db.ChiTietDonHangs.InsertOnSubmit(ct);
+
+                sequence++; // Tăng số thứ tự sau mỗi lần thêm
             }
+
+
 
             db.SubmitChanges();
             gioHang.lst.Clear();

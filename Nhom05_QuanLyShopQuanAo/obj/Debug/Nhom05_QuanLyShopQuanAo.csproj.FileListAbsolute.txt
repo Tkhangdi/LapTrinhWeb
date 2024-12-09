@@ -730,3 +730,5 @@ C:\Users\ASUS\Desktop\ltw_TranKhangDi\LapTrinhWeb\Nhom05_QuanLyShopQuanAo\obj\De
 C:\Users\ASUS\Desktop\ltw_TranKhangDi\LapTrinhWeb\Nhom05_QuanLyShopQuanAo\obj\Debug\Nhom05_QuanLyShopQuanAo.csproj.CopyComplete
 C:\Users\ASUS\Desktop\ltw_TranKhangDi\LapTrinhWeb\Nhom05_QuanLyShopQuanAo\obj\Debug\Nhom05_QuanLyShopQuanAo.dll
 C:\Users\ASUS\Desktop\ltw_TranKhangDi\LapTrinhWeb\Nhom05_QuanLyShopQuanAo\obj\Debug\Nhom05_QuanLyShopQuanAo.pdb
+C:\Users\ASUS\Desktop\Lap_Trinh_Web\Do_an_cuoi_ky\LapTrinhWeb\Nhom05_QuanLyShopQuanAo\bin\Newtonsoft.Json.dll
+C:\Users\ASUS\Desktop\Lap_Trinh_Web\Do_an_cuoi_ky\LapTrinhWeb\Nhom05_QuanLyShopQuanAo\bin\Newtonsoft.Json.xml
