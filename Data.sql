@@ -13,6 +13,7 @@
 USE [QL_ShopQuanAo]
 GO
 
+select * from ChiTietDonHang
 
 
 INSERT [dbo].[UserAccount] ([TenDangNhap], [MatKhau], [ChucVu]) VALUES (N'NV001', N'pass1', N'Nhân viên')

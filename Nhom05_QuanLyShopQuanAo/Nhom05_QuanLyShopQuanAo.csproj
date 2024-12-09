@@ -314,6 +314,7 @@
     <Content Include="Views\ThongTin\LichSuMuaHang.cshtml" />
     <Content Include="Views\ThongTin\ChiTietDonHang.cshtml" />
     <Content Include="Views\DangNhap\TimKiem.cshtml" />
+    <Content Include="Views\GioHang\XacNhanThanhToan.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

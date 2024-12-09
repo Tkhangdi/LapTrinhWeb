@@ -218,5 +218,105 @@ namespace Nhom05_QuanLyShopQuanAo.Controllers
             return RedirectToAction("Index", "GioHang");
         }
 
+
+
+
+
+
+
+        //////-----Bổ sung--------/////
+        /////////Bổ sung
+
+
+
+        [HttpPost]
+        public ActionResult DatHang(string phuongThucThanhToan)
+        {
+            // Kiểm tra nếu người dùng chưa đăng nhập
+            if (Session["khach"] == null)
+            {
+                TempData["LoginRequired"] = "Bạn chưa đăng nhập!";
+                return RedirectToAction("Login_NguoiDung", "DangNhap");
+            }
+
+            UserAccount kh = Session["khach"] as UserAccount;
+            var gioHang = (GioHang)Session["gh"] ?? new GioHang();
+
+            if (!gioHang.lst.Any())
+            {
+                TempData["CartEmpty"] = "Giỏ hàng của bạn đang trống!";
+                return RedirectToAction("Index");
+            }
+
+            foreach (var item in gioHang.lst)
+            {
+                var sizeSanPham = db.Size_SanPhams.FirstOrDefault(
+                    s => s.MaSanPham == item.MaSanPham && s.MaSize == item.Size
+                );
+
+                if (sizeSanPham == null || item.SoLuong > sizeSanPham.SoLuong)
+                {
+                    TempData["StockError"] = $"Sản phẩm '{item.TenSanPham}' không đủ số lượng trong kho.";
+                    return RedirectToAction("Index");
+                }
+            }
+
+            DonHang dh = new DonHang
+            {
+                MaDonHang = GenerateMaDonHang(),
+                MaKhachHang = kh.TenDangNhap,
+                NgayDat = DateTime.Now,
+                DiaChiGiaoHang = kh.KhachHang.DiaChi,
+                TrangThaiDonHang = "Đang xử lý",
+                TongTien = decimal.Parse(gioHang.lst.Sum(t => t.ThanhTien).ToString()),
+                PhuongThucThanhToan = phuongThucThanhToan
+            };
+
+            db.DonHangs.InsertOnSubmit(dh);
+            db.SubmitChanges();
+
+            foreach (var item in gioHang.lst)
+            {
+                ChiTietDonHang ct = new ChiTietDonHang
+                {
+                    MaChiTietDonHang = GenerateMaChiTietDonHang(),
+                    MaDonHang = dh.MaDonHang,
+                    MaSanPham = item.MaSanPham,
+                    SoLuong = item.SoLuong,
+                    GiaDonVi = decimal.Parse(item.Gia.ToString()),
+                    MaSize = item.Size,
+                    ThanhTien = decimal.Parse(item.ThanhTien.ToString())
+                };
+
+                db.ChiTietDonHangs.InsertOnSubmit(ct);
+            }
+
+            db.SubmitChanges();
+            gioHang.lst.Clear();
+
+            TempData["OrderSuccess"] = "Đặt hàng thành công!";
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult XacNhanThanhToan()
+        {
+            // Kiểm tra nếu người dùng chưa đăng nhập
+            if (Session["khach"] == null)
+            {
+                TempData["LoginRequired"] = "Bạn chưa đăng nhập!";
+                return RedirectToAction("Login_NguoiDung", "DangNhap");
+            }
+
+            // Lấy giỏ hàng từ Session
+            var gioHang = (GioHang)Session["gh"] ?? new GioHang();
+            if (!gioHang.lst.Any())
+            {
+                TempData["CartEmpty"] = "Giỏ hàng của bạn đang trống!";
+                return RedirectToAction("Index");
+            }
+
+            return View(gioHang);
+        }
+
     }
 }

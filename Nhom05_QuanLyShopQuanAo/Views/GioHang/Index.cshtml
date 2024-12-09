@@ -74,8 +74,9 @@
     <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Tiếp Tục Mua Sắm</a>
 
     <div class="container" style="padding-left:990px">
-        <form action="@Url.Action("DatHang", "GioHang")" method="post">
-            <button type="submit" onclick="showAlert()" class="btn btn-success">Đặt Hàng</button>
+        <form action="@Url.Action("XacNhanThanhToan", "GioHang")" method="post">
+            @*<button type="submit" onclick="showAlert()" class="btn btn-success">Đặt Hàng</button>*@
+            <button type="submit" class="btn btn-success">Đặt Hàng</button>
             <!-- Modal -->
 
         </form>
