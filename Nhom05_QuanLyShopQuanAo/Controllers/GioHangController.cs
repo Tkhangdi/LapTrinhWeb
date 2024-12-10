@@ -251,7 +251,7 @@ namespace Nhom05_QuanLyShopQuanAo.Controllers
 
 
         [HttpPost]
-        public ActionResult DatHang(string phuongThucThanhToan)
+        public ActionResult DatHang(string phuongThucThanhToan, string diaChiGiaoHang)
         {
             // Kiểm tra nếu người dùng chưa đăng nhập
             if (Session["khach"] == null)
@@ -287,7 +287,7 @@ namespace Nhom05_QuanLyShopQuanAo.Controllers
                 MaDonHang = GenerateMaDonHang(),
                 MaKhachHang = kh.TenDangNhap,
                 NgayDat = DateTime.Now,
-                DiaChiGiaoHang = kh.KhachHang.DiaChi,
+                DiaChiGiaoHang = diaChiGiaoHang, /*kh.KhachHang.DiaChi*/
                 TrangThaiDonHang = "Đang xử lý",
                 TongTien = decimal.Parse(gioHang.lst.Sum(t => t.ThanhTien).ToString()),
                 PhuongThucThanhToan = phuongThucThanhToan

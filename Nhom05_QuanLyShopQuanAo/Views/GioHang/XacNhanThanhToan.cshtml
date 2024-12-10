@@ -32,8 +32,33 @@
         </tbody>
     </table>
 
-    <h4>Chọn Phương Thức Thanh Toán:</h4>
+    @*<h4>Chọn Phương Thức Thanh Toán:</h4>
+        <form action="@Url.Action("DatHang", "GioHang")" method="post">
+            <div class="form-check" style="padding-left:20px">
+                <input class="form-check-input" type="radio" name="phuongThucThanhToan" value="Tiền mặt" id="cod" checked>
+                <label class="form-check-label" for="cod">
+                    Tiền mặt
+                </label>
+            </div>
+            <div class="form-check" style="padding-left:20px">
+                <input class="form-check-input" type="radio" name="phuongThucThanhToan" value="Chuyển khoản" id="online">
+                <label class="form-check-label" for="online">
+                    Chuyển khoản
+                </label>
+            </div>
+            <br />
+            <button type="submit" onclick="showAlert()" class="btn btn-success">Xác Nhận Thanh Toán</button>
+        </form>
+
+        <a href="@Url.Action("Index", "GioHang")" class="btn btn-secondary" style=" margin-top:15px">Quay Lại Giỏ Hàng</a>*@
+
     <form action="@Url.Action("DatHang", "GioHang")" method="post">
+        <div style=" padding-top:40px" class="form-group">
+            <h4 for="diaChiGiaoHang">Địa Chỉ Giao Hàng:</h4>
+            <input style="margin-top:20px" type="text" class="form-control" id="diaChiGiaoHang" name="diaChiGiaoHang" placeholder="Nhập địa chỉ giao hàng" required />
+        </div>
+
+        <h4 style="margin-top:40px" >Chọn Phương Thức Thanh Toán:</h4>
         <div class="form-check" style="padding-left:20px">
             <input class="form-check-input" type="radio" name="phuongThucThanhToan" value="Tiền mặt" id="cod" checked>
             <label class="form-check-label" for="cod">
@@ -47,10 +72,13 @@
             </label>
         </div>
         <br />
-        <button type="submit" onclick="showAlert()" class="btn btn-success">Xác Nhận Thanh Toán</button>
+        <button type="submit" style="margin-top:40px" onclick="showAlert()" class="btn btn-success">Xác Nhận Thanh Toán</button>
     </form>
 
     <a href="@Url.Action("Index", "GioHang")" class="btn btn-secondary" style=" margin-top:15px">Quay Lại Giỏ Hàng</a>
+
+
+
 </div>
 
 
