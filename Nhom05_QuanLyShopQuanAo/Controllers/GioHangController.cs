@@ -49,7 +49,6 @@ namespace Nhom05_QuanLyShopQuanAo.Controllers
 
             gh.themCartItem(item);
 
-
             return RedirectToAction("Index", "Home");
 
         }

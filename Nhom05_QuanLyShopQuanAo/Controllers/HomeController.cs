@@ -14,7 +14,6 @@ namespace Nhom05_QuanLyShopQuanAo.Controllers
         // GET: Home
         public ActionResult Index()
         {
-
             var allProducts = db.SanPhams.ToList();
 
             // Tính số lượng đã bán
